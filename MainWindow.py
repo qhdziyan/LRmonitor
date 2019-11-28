@@ -100,6 +100,8 @@ if __name__ == "__main__":
     mainwindow = Main()
     mainwindow.showMaximized()
     print("123")
+    print("123")
+    print("123")
     sys.exit(app.exec_())
 
 
