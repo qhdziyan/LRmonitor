@@ -99,4 +99,7 @@ if __name__ == "__main__":
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     mainwindow = Main()
     mainwindow.showMaximized()
+    print("abc")
     sys.exit(app.exec_())
+
+
