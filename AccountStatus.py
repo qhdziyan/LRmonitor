@@ -29,14 +29,14 @@ class myform(QWidget, Ui_Form):
 
 
 
-        self.table.setRowCount(row)
-        self.table.setColumnCount(vol)
+        self.tableWidget.setRowCount(row)
+        self.tableWidget.setColumnCount(vol)
 
         for i in range(row):
             for j in range(vol):
                 temp_data = row[i][j]  # 临时记录，不能直接插入表格
                 data = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
-                self.table.setItem(i, j, data)
+                self.tableWidget.setItem(i, j, data)
 
 
 app = QApplication(sys.argv)
