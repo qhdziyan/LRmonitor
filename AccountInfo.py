@@ -11,7 +11,7 @@ class AccountInfo(QWidget, Ui_Form):
         super().__init__()
         self.setupUi(self)
         self.threadstartslot()
-        self.show()
+        #self.show()
     # 线程测试开始
     def threadstartslot(self):
         self.work = Thread()
@@ -32,8 +32,7 @@ class AccountInfo(QWidget, Ui_Form):
         vol = len(data[0])  # 取得字段数，用于设置表格的列数
         cursor.close()
         db.close()
-        print(data[0])
-        titles = ['账号', '余额', '入金', '出金', ' 已用保证金', '可用保证金', '保证金比率','账户盈利']
+        titles = ['账号', '余额','净值', '入金', '出金', ' 已用保证金', '可用保证金', '保证金比率','账户盈利']
         self.tableWidget.setRowCount(row)
         self.tableWidget.setColumnCount(vol)
         self.tableWidget.setHorizontalHeaderLabels(titles)

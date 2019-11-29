@@ -3,6 +3,7 @@ import sys
 import time
 from CheckOrder import CheckOrder
 from AccountStatus import AccountStatus
+from AccountInfo import AccountInfo
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -44,10 +45,7 @@ class Ui_Form(object):
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout.addWidget(self.textBrowser)
-
-
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
-
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -69,6 +67,8 @@ class LRHomeWindow(QWidget, Ui_Form):
             self.checkinstance.InitCurOrders(account)
         self.threadstartslot()
         self.checkinstance.AlertSignal.connect(self.ShowMessage)
+        self.AccountInfoWindow = AccountInfo()
+        self.pushButton_3.clicked.connect(self.AccountInfoWindow.showMaximized)
 
     # 线程测试开始
     def threadstartslot(self):
@@ -90,6 +90,8 @@ class LRHomeWindow(QWidget, Ui_Form):
     def ShowMessage(self,contents):
         self.textBrowser.append(contents)
         self.textBrowser.append("-----------------------------------------------------------------------------------------------")
+
+
 class Thread(QThread):
     trigger = pyqtSignal()#注意pyqtSignal一定要实例到__init__前面
     def __init__(self):
