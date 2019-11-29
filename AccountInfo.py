@@ -6,9 +6,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 import pymysql
 
-
-
-class AccountStatus(QWidget, Ui_Form):
+class AccountInfo(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -28,23 +26,21 @@ class AccountStatus(QWidget, Ui_Form):
     def load(self):
         db = pymysql.connect("localhost", "root", "Lianrun!@#", "posorders")
         cursor = db.cursor()
-        cursor.execute("SELECT * from account.accountstatus")
+        cursor.execute("SELECT * from account.AccountInfo")
         data = cursor.fetchall()
         row = cursor.rowcount  # 取得记录个数，用于设置表格的行数
         vol = len(data[0])  # 取得字段数，用于设置表格的列数
         cursor.close()
         db.close()
-        titles = ['账号', '连接状态', '客户端繁忙', '最后连接时间', ' 是否全跟上', 'EA更新', '创建时间']
+        print(data[0])
+        titles = ['账号', '余额', '入金', '出金', ' 已用保证金', '可用保证金', '保证金比率','账户盈利']
         self.tableWidget.setRowCount(row)
         self.tableWidget.setColumnCount(vol)
         self.tableWidget.setHorizontalHeaderLabels(titles)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         for i in range(row):
             for j in range(vol):
-                if j==3:
-                    temp_data=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(data[i][j]))
-                else:
-                    temp_data = data[i][j]  # 临时记录，不能直接插入表格
+                temp_data = data[i][j]  # 临时记录，不能直接插入表格
                 showdata = QTableWidgetItem(str(temp_data))  # 转换后可插入表格
                 self.tableWidget.setItem(i, j, showdata)
 class Thread(QThread):
@@ -58,8 +54,8 @@ class Thread(QThread):
         while self.threadstartflag == True:
             self.trigger.emit()#发送更新GUI的信号
             time.sleep(5)
-
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    w = AccountStatus()
+    w = AccountInfo()
+    w.showMaximized()
     app.exec_()
