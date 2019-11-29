@@ -20,7 +20,7 @@ class myform(QWidget, Ui_Form):
     def load(self):
         db = pymysql.connect("localhost", "root", "Lianrun!@#", "posorders")
         cursor = db.cursor()
-        cursor.execute("SELECT * from posorders.%s order by OrderOpenTime desc")
+        cursor.execute("SELECT * from account.accountstatus order")
         data = cursor.fetchall()
         row = cursor.rowcount  # 取得记录个数，用于设置表格的行数
         vol = len(row[0])  # 取得字段数，用于设置表格的列数
