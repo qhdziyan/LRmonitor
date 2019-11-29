@@ -4,6 +4,7 @@ from PyQt5.Qt import QWidget, QApplication, QTableWidgetItem
 import psycopg2
 
 
+
 class myform(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
