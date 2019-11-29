@@ -104,9 +104,9 @@ class CheckOrder(QObject):
                     data = cursor.fetchall()
                     for row in data:
                         if key in row[0]:
-                            #openticket[key].remove(i)
                             ticketlist.append(i)
                             break
+                    cursor.close()
                     db.close()
                 for ticket in ticketlist:
                     openticket[key].remove(ticket)
@@ -138,6 +138,7 @@ class CheckOrder(QObject):
                             if key in row[0]:
                                 ticketlist.append(i)
                                 break
+                    cursor.close()
                     db.close()
                 for ticket in ticketlist:
                     closeticket[key].remove(ticket)
