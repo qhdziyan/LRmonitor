@@ -56,8 +56,7 @@ class Thread(QThread):
     #执行耗时操作
     def run(self):
         while self.threadstartflag == True:
-            self.trigger.emit(u"计时%d"%self.timecount)#发送更新GUI的信号
-            self.timecount+=1
+            self.trigger.emit()#发送更新GUI的信号
             time.sleep(1)
 
 app = QApplication(sys.argv)
