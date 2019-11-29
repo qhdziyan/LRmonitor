@@ -1,5 +1,10 @@
+
 import sys
+from importlib import reload
+reload(sys)
+
 import time
+from CheckOrder import CheckOrder
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
@@ -58,7 +63,11 @@ class LRHomeWindow(QWidget, Ui_Form):
     def __init__(self, parent=None):
         super(LRHomeWindow, self).__init__(parent)
         self.setupUi(self)
-        # self.threadstartslot()
+        self.checkinstance = CheckOrder()
+        for account in self.checkinstance.SourceAccountList:
+            self.checkinstance.InitCurOrders(account)
+        self.threadstartslot()
+        self.checkinstance.AlertSignal.connect(self.ShowMessage)
 
     # 线程测试开始
     def threadstartslot(self):
@@ -72,15 +81,20 @@ class LRHomeWindow(QWidget, Ui_Form):
 
     # 更新UI方法
     def deal(self, str):
-        self.textBrowser.append(str)
+        #检查新订单
+        if time.time()-self.checkinstance.CheckNewOrderTime>=2:
+            self.CheckNewOrderTime=time.time()
+            for account in self.checkinstance.SourceAccountList:
+                self.checkinstance.SearchNewOrders(account)
+        #检查跟单账户跟单状态
+        if time.time()-self.checkinstance.CheckSlaveOrderTime>=5:
+            self.checkinstance.CheckSlaveOrderTime=time.time()
+            self.checkinstance.SearchFollowOpenOrders(self.checkinstance.NewOpenTicket)
+            self.checkinstance.SearchFollowCloseOrders(self.checkinstance.NewCloseTicket)
 
-    # 按钮点击
-    def clickAccountStatusBotton(self):
-        print('Abc')
-        self.textBrowser.deleteLater()
-
-    def click1(self):
-        print('123')
+    def ShowMessage(self,contents):
+        self.textBrowser.append(contents)
+        self.textBrowser.append("-----------------------------------------------------------------------------------------------")
 class Thread(QThread):
     trigger = pyqtSignal(str)#注意pyqtSignal一定要实例到__init__前面
     def __init__(self):
@@ -96,11 +110,13 @@ class Thread(QThread):
             time.sleep(1)
 
 if __name__ == '__main__':
+
     app = QtWidgets.QApplication(sys.argv)
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
-    mainWindow = QtWidgets.QMainWindow()
+    #mainWindow = QtWidgets.QMainWindow()
     ui = LRHomeWindow()
-    ui.setupUi(mainWindow)
+    #ui.setupUi(mainWindow)
+    ui.show()
     #ui.threadstartslot()
-    mainWindow.show()
+    #mainWindow.show()
     sys.exit(app.exec_())

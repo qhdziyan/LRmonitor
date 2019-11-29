@@ -46,7 +46,6 @@ class Main(QMainWindow):
     def SignIn(self, studentId):
         sip.delete(self.widget)
         self.widget = LRHomeWindow()
-        self.widget.threadstartslot()
         self.setCentralWidget(self.widget)
         self.changePasswordAction.setEnabled(False)
         self.signUpAction.setEnabled(True)
