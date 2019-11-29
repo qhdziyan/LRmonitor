@@ -12,6 +12,8 @@ class myform(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.titles = ['账号', '连接状态', '客户端繁忙', '最后连接时间', ' 是否全跟上','EA更新','创建时间']
+        self.tableWidget.setHorizontalHeaderLabels(self.titles)
         self.pushButton_2.clicked.connect(self.clear)
         self.threadstartslot()
         self.show()
