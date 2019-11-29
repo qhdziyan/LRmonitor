@@ -71,11 +71,9 @@ class LRHomeWindow(QWidget, Ui_Form):
         self.work = Thread()
         self.work.trigger.connect(self.deal)  # 线程中的trigger与主类中的方法进行绑定
         self.work.start()  # 开启线程
-
     # 线程测试停止
     def threadstopslot(self):
         self.work.threadstartflag = False
-
     # 更新UI方法
     def deal(self, str):
         #检查新订单
