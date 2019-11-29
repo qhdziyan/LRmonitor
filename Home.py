@@ -2,7 +2,7 @@
 import sys
 import time
 from CheckOrder import CheckOrder
-
+from AccountStatus import AccountStatus
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -42,6 +42,8 @@ class Ui_Form(object):
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout.addWidget(self.textBrowser)
+        self.AccountStatus=AccountStatus()
+        self.verticalLayout.addWidget(self.AccountStatus)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -111,7 +113,7 @@ if __name__ == '__main__':
     #mainWindow = QtWidgets.QMainWindow()
     ui = LRHomeWindow()
     #ui.setupUi(mainWindow)
-    ui.show()
+    ui.showMaximized()
     #ui.threadstartslot()
     #mainWindow.show()
     sys.exit(app.exec_())
