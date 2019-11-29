@@ -4,6 +4,7 @@ import time
 from CheckOrder import CheckOrder
 from AccountStatus import AccountStatus
 from AccountInfo import AccountInfo
+from EAControl import EAControl
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -69,6 +70,8 @@ class LRHomeWindow(QWidget, Ui_Form):
         self.checkinstance.AlertSignal.connect(self.ShowMessage)
         self.AccountInfoWindow = AccountInfo()
         self.pushButton_3.clicked.connect(self.AccountInfoWindow.showMaximized)
+        self.EAControlWindow = EAControl()
+        self.pushButton_6.clicked.connect(self.EAControlWindow.show)
 
     # 线程测试开始
     def threadstartslot(self):
