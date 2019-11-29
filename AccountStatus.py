@@ -10,8 +10,8 @@ class myform(QWidget, Ui_Form):
         super().__init__()
         self.setupUi(self)
 
-        self.btn1.clicked.connect(self.clear)
-        self.btn2.clicked.connect(self.load)
+        self.pushButton_2.clicked.connect(self.clear)
+        self.pushButton.clicked.connect(self.load)
         self.show()
 
     def clear(self):
