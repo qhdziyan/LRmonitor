@@ -39,11 +39,13 @@ class Ui_Form(object):
         self.pushButton_5.setObjectName("pushButton_5")
         self.horizontalLayout.addWidget(self.pushButton_5)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.AccountStatus = AccountStatus()
+        self.verticalLayout.addWidget(self.AccountStatus)
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout.addWidget(self.textBrowser)
-        self.AccountStatus=AccountStatus()
-        self.verticalLayout.addWidget(self.AccountStatus)
+
+
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -77,23 +79,19 @@ class LRHomeWindow(QWidget, Ui_Form):
     def threadstopslot(self):
         self.work.threadstartflag = False
     # 更新UI方法
-    def deal(self, str):
+    def deal(self):
         #检查新订单
-        if time.time()-self.checkinstance.CheckNewOrderTime>=2:
-            self.CheckNewOrderTime=time.time()
-            for account in self.checkinstance.SourceAccountList:
-                self.checkinstance.SearchNewOrders(account)
+        for account in self.checkinstance.SourceAccountList:
+            self.checkinstance.SearchNewOrders(account)
         #检查跟单账户跟单状态
-        if time.time()-self.checkinstance.CheckSlaveOrderTime>=5:
-            self.checkinstance.CheckSlaveOrderTime=time.time()
-            self.checkinstance.SearchFollowOpenOrders(self.checkinstance.NewOpenTicket)
-            self.checkinstance.SearchFollowCloseOrders(self.checkinstance.NewCloseTicket)
-
+        self.checkinstance.SearchFollowOpenOrders(self.checkinstance.NewOpenTicket)
+        self.checkinstance.SearchFollowCloseOrders(self.checkinstance.NewCloseTicket)
+    #显示信息
     def ShowMessage(self,contents):
         self.textBrowser.append(contents)
         self.textBrowser.append("-----------------------------------------------------------------------------------------------")
 class Thread(QThread):
-    trigger = pyqtSignal(str)#注意pyqtSignal一定要实例到__init__前面
+    trigger = pyqtSignal()#注意pyqtSignal一定要实例到__init__前面
     def __init__(self):
         super(Thread, self).__init__()
         #定义的变量
@@ -102,9 +100,8 @@ class Thread(QThread):
     #执行耗时操作
     def run(self):
         while self.threadstartflag == True:
-            self.trigger.emit(u"计时%d"%self.timecount)#发送更新GUI的信号
-            self.timecount+=1
-            time.sleep(1)
+            self.trigger.emit()#发送更新GUI的信号
+            time.sleep(3)
 
 if __name__ == '__main__':
 

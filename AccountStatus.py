@@ -12,8 +12,6 @@ class AccountStatus(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
-        self.pushButton_2.clicked.connect(self.clear)
         self.threadstartslot()
         self.show()
     # 线程测试开始
@@ -57,12 +55,11 @@ class Thread(QThread):
         super(Thread, self).__init__()
         #定义的变量
         self.threadstartflag=True
-        self.timecount=0
     #执行耗时操作
     def run(self):
         while self.threadstartflag == True:
             self.trigger.emit()#发送更新GUI的信号
-            time.sleep(1)
+            time.sleep(5)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
