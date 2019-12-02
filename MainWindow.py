@@ -23,20 +23,21 @@ class Main(QMainWindow):
         bar = self.menuBar()
         self.Menu = bar.addMenu("菜单栏")
 
-        self.signUpAction = QAction("注册", self)
-        self.changePasswordAction =QAction("修改密码",self)
-        self.signInAction = QAction("登录", self)
+        #self.signUpAction = QAction("注册", self)
+        #self.changePasswordAction =QAction("修改密码",self)
+        #self.signInAction = QAction("登录", self)
         self.quitSignInAction = QAction("退出登录", self)
 
         self.quitAction = QAction("退出", self)
-        self.Menu.addAction(self.signUpAction)
-        self.Menu.addAction(self.changePasswordAction)
-        self.Menu.addAction(self.signInAction)
-        self.Menu.addAction(self.quitSignInAction)
+        #self.Menu.addAction(self.signUpAction)
+        #self.Menu.addAction(self.changePasswordAction)
+
+        #self.Menu.addAction(self.signInAction)
+        #self.Menu.addAction(self.quitSignInAction)
         self.Menu.addAction(self.quitAction)
-        self.signUpAction.setEnabled(True)
-        self.changePasswordAction.setEnabled(True)
-        self.signInAction.setEnabled(False)
+        #self.signUpAction.setEnabled(True)
+        #self.changePasswordAction.setEnabled(True)
+        #self.signInAction.setEnabled(False)
         self.quitSignInAction.setEnabled(False)
 
         self.widget.signin_signal[str].connect(self.SignIn)
@@ -47,9 +48,9 @@ class Main(QMainWindow):
         sip.delete(self.widget)
         self.widget = LRHomeWindow()
         self.setCentralWidget(self.widget)
-        self.changePasswordAction.setEnabled(False)
-        self.signUpAction.setEnabled(True)
-        self.signInAction.setEnabled(False)
+        #self.changePasswordAction.setEnabled(False)
+        #self.signUpAction.setEnabled(True)
+        #self.signInAction.setEnabled(False)
         self.quitSignInAction.setEnabled(True)
 
     def menuTriggered(self, q):
@@ -90,7 +91,6 @@ class Main(QMainWindow):
             qApp = QApplication.instance()
             qApp.quit()
         return
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

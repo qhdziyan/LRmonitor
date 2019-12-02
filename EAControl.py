@@ -10,7 +10,7 @@ class EAControl(QWidget, Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.show()
+        #self.show()
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     w = EAControl()

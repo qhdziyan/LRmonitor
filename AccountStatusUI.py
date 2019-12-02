@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui,QtWidgets,Qt
 
 
 class Ui_Form(object):
@@ -19,12 +19,15 @@ class Ui_Form(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        #self.pushButton = QtWidgets.QPushButton(Form)
+        #self.pushButton.setObjectName("pushButton")
+        self.radio_1 = QtWidgets.QRadioButton("显示所有账号状态")
+        self.radio_1.setChecked(True)
+        self.radio_2 = QtWidgets.QRadioButton("显示错误账号状态")
+        self.horizontalLayout.addWidget(self.radio_1)
+        #self.pushButton_2 = QtWidgets.QPushButton(Form)
+        #self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout.addWidget(self.radio_2)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout, 1, 0, 1, 1)
         self.tableWidget = QtWidgets.QTableWidget(Form)
@@ -33,13 +36,16 @@ class Ui_Form(object):
         self.tableWidget.setRowCount(0)
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 
-        self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+
+
+
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.pushButton.setText(_translate("Form", "刷新"))
-        self.pushButton_2.setText(_translate("Form", "清除"))
+        self.radio_1.setText(_translate("Form", "显示所有账户状态"))
+        self.radio_2.setText(_translate("Form", "显示错误账户状态"))
 
 
