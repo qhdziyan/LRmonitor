@@ -24,9 +24,9 @@ class Ui_Form(object):
 
         self.AccountStatus = AccountStatus()
         self.verticalLayout.addWidget(self.AccountStatus)
-        self.textBrowser = QtWidgets.QTextBrowser(Form)
-        self.textBrowser.setObjectName("textBrowser")
-        self.verticalLayout.addWidget(self.textBrowser)
+        #self.textBrowser = QtWidgets.QTextBrowser(Form)
+        #self.textBrowser.setObjectName("textBrowser")
+        #self.verticalLayout.addWidget(self.textBrowser)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -63,8 +63,10 @@ class LRHomeWindow(QWidget, Ui_Form):
         self.checkinstance.SearchFollowCloseOrders(self.checkinstance.NewCloseTicket)
     #显示信息
     def ShowMessage(self,contents):
-        self.textBrowser.append(contents)
-        self.textBrowser.append("-----------------------------------------------------------------------------------------------")
+        pass
+        #self.textBrowser.append(contents)
+
+        #self.textBrowser.append("-----------------------------------------------------------------------------------------------")
 
 
 class Thread(QThread):

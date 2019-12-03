@@ -15,11 +15,10 @@ class CheckOrder(QObject):
     def __init__(self):
         super(CheckOrder, self).__init__()
         # 信号源账户信息
-
-        self.SourceAccountList = [2090463533,55864420]
+        self.SourceAccountList = [2090463533]
         self.SourceAccountCurOrders = {};
         #跟单账户信息
-        self.SlaveAccountList = [4002645,4002649,51191958,4002651]
+        self.SlaveAccountList = [4002645,4002649,51191958,4002651,55864420]
         self.NewOpenTicket = {};
         self.NewCloseTicket ={};
         self.TargetName="少先队员"
